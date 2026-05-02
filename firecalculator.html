@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIRE Calculator - Tự Do Tài Chính</title>
+    
+    <!-- 1. ICON TRÊN TAB TRÌNH DUYỆT (Favicon) -->
+    <link rel="icon" type="image/png" href="https://www.flaticon.com/free-icon/financial-profit_4256863?term=money&related_id=4256863">
+
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            --dark-blue: #2c3e50;
+            --bg-light: #f9fbf9;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(46, 204, 113, 0.1);
+            width: 380px;
+            text-align: center;
+            border: 1px solid #eee;
+        }
+        /* 2. STYLE CHO ICON CHÍNH TRONG TRANG */
+        .main-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            /* Hiệu ứng đổ bóng nhẹ cho icon */
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+        }
+        h2 { color: var(--dark-blue); margin-bottom: 10px; font-size: 1.6rem; }
+        p.subtitle { color: #7f8c8d; font-size: 0.9rem; margin-bottom: 25px; }
+        
+        .input-box {
+            background: #f1f2f6;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .input-box span { margin-right: 10px; font-weight: bold; color: #95a5a6; }
+        input {
+            border: none;
+            background: transparent;
+            width: 100%;
+            font-size: 1.1rem;
+            outline: none;
+            color: var(--dark-blue);
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover { background: #27ae60; transform: translateY(-2px); }
+        
+        .result-area {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 15px;
+            background: #f0fff4;
+            display: none;
+            border: 1px dashed var(--primary-color);
+        }
+        .result-label { font-size: 0.85rem; color: #27ae60; text-transform: uppercase; font-weight: bold; }
+        .result-value { font-size: 1.8rem; font-weight: 800; color: var(--dark-blue); margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- 3. CHÈN ICON PHÙ HỢP (Hình ảnh tiền rơi vào tay - Biểu tượng của sự tự do) -->
+    <img src="https://flaticon.com" alt="Financial Freedom Icon" class="main-icon">
+    
+    <h2>Mục tiêu FIRE</h2>
+    <p class="subtitle">Tính toán số vốn cần thiết để nghỉ hưu sớm</p>
+
+    <div class="input-box">
+        <span>₫</span>
+        <input type="number" id="monthlySpend" placeholder="Chi tiêu tháng của bạn">
+    </div>
+
+    <button onclick="calculateFIRE()">TÍNH TOÁN NGAY</button>
+
+    <div class="result-area" id="resultArea">
+        <div class="result-label">Số tiền cần tích lũy</div>
+        <div class="result-value" id="fireValue">0 ₫</div>
+        <small style="color: #95a5a6;">(Áp dụng quy tắc rút 4% mỗi năm)</small>
+    </div>
+</div>
+
+<script>
+    function calculateFIRE() {
+        const spend = document.getElementById('monthlySpend').value;
+        if (spend > 0) {
+            // Công thức: Chi tiêu năm * 25
+            const total = spend * 12 * 25;
+            
+            document.getElementById('resultArea').style.display = 'block';
+            document.getElementById('fireValue').innerText = 
+                new Intl.NumberFormat('vi-VN').format(total) + ' ₫';
+        } else {
+            alert("Vui lòng nhập số tiền chi tiêu hợp lệ!");
+        }
+    }
+</script>
+
+</body>
+</html>
